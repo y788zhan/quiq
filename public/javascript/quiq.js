@@ -177,6 +177,7 @@ app.controller('courseController', ['$scope', '$rootScope', '$location',
 	function($scope, $rootScope, $location) {
 		$scope.currentCourseID = $rootScope.current_lecture.id;
 		$scope.questions = [];
+		$scope.action = "Answer";
 		var ref = new Firebase("https://quiq.firebaseio.com/instructors/" + $rootScope.current_user + "/" + $scope.currentCourseID + "/lectures/" + $rootScope.current_lecture_section);
 		//console.log("https://quiq.firebaseio.com/instructors/" + $rootScope.current_user + "/" + $scope.currentCourseID + "/lectures/" + $rootScope.current_lecture_section);
 		ref.on("value", function(snapshot) {
@@ -220,8 +221,12 @@ app.controller('courseController', ['$scope', '$rootScope', '$location',
 			var uploadAudio = function (link) {
 				ref.child('questions').child(index).update({answer: link});
 			}
-			if (this.recording == null) this.recording = false;
+			if (this.recording == null) {
+				$scope.action = "Stop recording";
+				this.recording = false;
+			}
 			if (this.recording == true) {
+				$scope.action = "Answer";
 			    stopRecording(this, uploadAudio)
 			    this.recording = false;
 				console.log(index);
