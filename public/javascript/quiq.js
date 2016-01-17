@@ -214,10 +214,23 @@ app.controller('courseController', ['$scope', '$rootScope', '$location',
 		});
 
 		$scope.answer = function(index) {
-			console.log(index);
-			ref.child('questions').child(index).update({answered:true});
-			console.log('done');
-			ref.child('questions').child(index).update({answer: "some answer"});
+			var initAnswer = function () {
+				ref.child('questions').child(index).update({answered:true});
+			}
+			var uploadAudio = function (link) {
+				ref.child('questions').child(index).update({answer: link});
+			}
+			if (this.recording == null) this.recording = false;
+			if (this.recording == true) {
+			    stopRecording(this, uploadAudio)
+			    this.recording = false;
+				console.log(index);
+			}
+			else {
+			    startRecording(this, initAnswer)
+			    this.recording = true;
+			    console.log('done');
+			}
 		};
 
 		$scope.dismiss = function(index) {
