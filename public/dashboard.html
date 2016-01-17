@@ -1,0 +1,17 @@
+<form class="form-class" ng-submit="addClass()">
+	<h2>Add Class</h2>
+	<input ng-model="className.id" placeholder="Class ID" class="form-control"><br>
+	<input type="submit" value="Add Class" class="btn btn-primary" />
+</form>
+
+<br>
+
+<form class="form-class" ng-submit="beginLecture()">
+	<h2>Begin Class</h2>
+	<label for="mySelect">Choose course:</label>
+	<select name="mySelect" id="mySelect"
+		ng-options="course.id for course in courses.availableOptions track by course.id"
+		ng-model="courses.selectedOption"></select>
+	<hr>
+	<input type="submit" value="Begin Class" class="btn btn-primary" />
+</form>

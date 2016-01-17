@@ -1,0 +1,13 @@
+<div class="questions">
+	<h2>Questions</h2>
+	<div ng-repeat="question in questions">
+		<br>
+		{{question.text}}
+		<br>
+		Popularity: {{question.votes}}
+		<br>
+		<a class="btn btn-primary" ng-click="answer(question.index)">Answer</a>
+		<a class="btn btn-warning" ng-click="dismiss(question.index)">Dismiss</a>
+		<br>
+	</div>
+</div>
