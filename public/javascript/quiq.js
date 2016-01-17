@@ -110,17 +110,13 @@ app.controller('authController', ["$scope", "Auth", "$rootScope", "$location",
 
 
 function prepopulate() {
-	var ref = new Firebase("https://quiq.firebaseio.com/instructors/Do%20Not%20Touch/1234/lectures/17-01-2016");
+	var ref = new Firebase("https://quiq.firebaseio.com/instructors/Do%20Not%20Touch/12312413/lectures/17-01-2016");
 	var questionRef = [];
 	for (var i = 0; i < 10; i++) {
-		var votes = [];
-		for (var j = 0; j < i; j++) {
-			votes[j] = 1;
-		}
 		questionRef[i] = {
 			index: i,
 			text: "sample text" + i,
-			votes: votes,
+			votes: i,
 			answered: false,
 			answer: "empty"
 		};
