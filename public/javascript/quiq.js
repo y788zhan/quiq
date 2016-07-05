@@ -109,18 +109,15 @@ app.controller('authController', ["$scope", "Auth", "$rootScope", "$location",
 ]);
 
 
-function prepopulate() {
-	var ref = new Firebase("https://quiq.firebaseio.com/instructors/Do%20Not%20Touch/12312413/lectures/17-01-2016");
-	var questionRef = [];
-	for (var i = 0; i < 10; i++) {
-		questionRef[i] = {
-			index: i,
-			text: "sample text" + i,
-			votes: i,
-			answered: false,
-			answer: "empty"
-		};
-	}
+function prepopulate(course) {
+	var ref = new Firebase("https://quiq.firebaseio.com/instructors/Smith/" + course + "/lectures/17-01-2016");
+	var questionRef = [{
+		index: 0,
+		text: "",
+		votes: 1,
+		answered: false,
+		answer: "empty"
+	}];
 	ref.child('questions').set(questionRef);
 }
 
@@ -166,7 +163,7 @@ app.controller('dashController', ["$scope", "$rootScope", "$location",
 				title: "circuits"
 			});
 			console.log(timeStamp);
-			prepopulate();
+			//prepopulate($rootScope.current_lecture.id);
 			$location.path('/current-course');
 		};
 	}
